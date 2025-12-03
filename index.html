@@ -1,308 +1,211 @@
-<!DOCTYPE html> 
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <base target="_top">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
-
-  <title>Menu Natal Especial</title>
-
-  <!-- ---------------- TEMAS ---------------- -->
-  <script>
-    const THEMES = {
-      red: { bg:"#faf6f0", header1:"#b30000", header2:"#700000", accent:"#c41e3a", textDark:"#600000" },
-    };
-    let theme = THEMES.red;
-    document.addEventListener("DOMContentLoaded", () => {
-      for (let key in theme)
-        document.documentElement.style.setProperty(`--${key}`, theme[key]);
-    });
-  </script>
-
-  <!-- ---------------- CSS ---------------- -->
-  <style>
-    :root {
-      --bg:#faf6f0; --header1:#b30000; --header2:#700000;
-      --accent:#c41e3a; --textDark:#600000;
-    }
-
-    body {
-      font-family:'Poppins',sans-serif;
-      background:var(--bg);
-      margin:0;
-      padding:18px;
-    }
-
-    h1 {
-      font-family:'Great Vibes',cursive;
-      font-size:48px;
-      text-align:center;
-      margin-bottom:10px;
-      background: linear-gradient(135deg, var(--header1), var(--header2));
-      padding:20px;
-      color:white;
-      border-radius:12px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.25);
-    }
-
-    .item {
-      display:flex;
-      align-items:center;
-      background:#fff;
-      padding:15px;
-      border-radius:19px;
-      margin-bottom:20px;
-      max-width: 80%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* ----------- CARTÃO ESTILO IFOOD ----------- */
-    .product {
-      display:flex;
-      background:#fff;
-      border-radius:18px;
-      padding:16px 16px 16px 30px;
-      margin-bottom:32px;
-      box-shadow:0 4px 12px rgba(0,0,0,0.12);
-      gap:16px;
-      align-items:center;
-    }
-
-    .product img {
-      width:130px;
-      height:130px;
-      object-fit:cover;
-      border-radius:18px;
-      border:3px solid var(--accent);
-    }
-
-    .info {
-      flex:none;
-      width:60%;
-    }
-
-    .info strong {
-      font-size:24px;
-      font-weight:700;
-      color:var(--textDark);
-    }
-
-    .info .price {
-      font-size:20px;
-      margin-top:8px;
-      font-weight:600;
-      color:#444;
-    }
-
-    .qty {
-      width:80px;
-      font-size:22px;
-      height:70px;
-      line-height:70px;
-      border-radius:12px;
-      border:2px solid var(--accent);
-      text-align:center;
-      margin-left:12px;
-      padding:0;
-    }
-
-    .btn {
-      background:var(--header1);
-      color:white;
-      border:none;
-      padding:16px 20px;
-      border-radius:14px;
-      cursor:pointer;
-      font-size:22px;
-      width:100%;
-      transition:0.25s;
-      font-weight:600;
-    }
-
-    .btn:hover {
-      background:var(--header2);
-    }
-
-    .summary {
-      margin-top:20px;
-      padding:20px;
-      border-radius:14px;
-      background:#fff;
-      box-shadow:0 3px 10px rgba(0,0,0,0.15);
-      font-size: 22px;
-      font-weight: 600;
-    }
-
-    .total {
-      font-size:24px;
-      font-weight:bold;
-      color:var(--textDark);
-    }
-
-    #status {
-      display:none;
-      font-size:22px;
-      text-align:center;
-      font-weight:bold;
-      padding:14px;
-      border-radius:10px;
-      background:#e8ffe8;
-      color:#0a7a0a;
-      border:2px solid #3bb33b;
-    }
-
-    /* --------- CAMPOS INDIVIDUAIS --------- */
-
-    .input-nome {
-      font-size:30px;
-      color:#600000;
-      font-weight:600;
-      font-family:'Poppins',sans-serif;
-    }
-
-    .input-telefone {
-      font-size:30px;
-      color:#700000;
-      font-family:'Poppins',sans-serif;
-    }
-
-    .input-email {
-      font-size:30px;
-      color:#900000;
-      font-family:'Poppins',sans-serif;
-    }
-
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Menu Natal Especial</title>
+<style>
+  :root{
+    --bg:#faf6f0; --header1:#b30000; --header2:#700000; --accent:#c41e3a; --text:#333;
+  }
+  html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+  body{background:var(--bg);padding:18px;box-sizing:border-box;color:var(--text)}
+  .wrap{max-width:900px;margin:0 auto}
+  header{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:18px}
+  h1{font-family: "Georgia", serif;font-size:44px;margin:0;color:white;padding:16px 28px;border-radius:12px;
+      background:linear-gradient(135deg,var(--header1),var(--header2));box-shadow:0 4px 10px rgba(0,0,0,0.18)}
+  .catalog-btn{background:var(--header1);color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;display:inline-block}
+  #products{display:flex;flex-direction:column;gap:18px;margin:18px 0}
+  .product{display:flex;align-items:center;background:#fff;border-radius:16px;padding:12px;box-shadow:0 6px 14px rgba(0,0,0,0.08);gap:12px}
+  .product img{width:110px;height:110px;object-fit:cover;border-radius:12px;border:3px solid var(--accent);flex:0 0 110px}
+  .info{flex:1}
+  .info strong{display:block;font-size:20px;color:var(--header2)}
+  .price{font-weight:700;margin-top:6px}
+  .qty{width:84px;height:54px;font-size:20px;padding:6px;border-radius:10px;border:2px solid var(--accent);text-align:center}
+  .summary{margin-top:22px;background:#fff;padding:18px;border-radius:12px;box-shadow:0 6px 14px rgba(0,0,0,0.08)}
+  label{display:block;margin-bottom:8px;font-weight:600}
+  input[type=text],input[type=email]{width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;font-size:18px}
+  .total{font-size:20px;font-weight:800;color:var(--header2);margin-top:8px}
+  .btn{background:var(--header1);color:#fff;border:none;padding:12px 18px;border-radius:10px;font-size:18px;cursor:pointer}
+  .status{margin-top:12px;padding:10px;border-radius:8px;display:none}
+  .status.ok{background:#e8ffe8;color:#0a7a0a;border:1px solid #3bb33b;display:block}
+  .status.err{background:#ffe8e8;color:#7a0a0a;border:1px solid #b33b3b;display:block}
+  /* small screens */
+  @media(max-width:600px){
+    .product{flex-direction:row;gap:12px}
+    .info strong{font-size:18px}
+    .price{font-size:16px}
+  }
+</style>
 </head>
-
 <body>
-  <h1>Menu Natal Especial</h1>
+<div class="wrap">
+  <header>
+    <h1>Menu Natal Especial</h1>
+    <a class="catalog-btn" href="https://drive.google.com/uc?export=view&id=1WYdfY_3xmnUY8qigKkjUOldoLjxUdRY0" target="_blank">📖 Ver Catálogo Completo</a>
+  </header>
 
-  <div style="text-align:center; margin:20px 0;">
-    <a href="https://drive.google.com/uc?export=view&id=1WYdfY_3xmnUY8qigKkjUOldoLjxUdRY0"
-       target="_blank" class="btn">
-       📖 Ver Catálogo Completo
-    </a>
-  </div>
+  <main>
+    <div id="products">Carregando produtos...</div>
 
-  <div id="products">Carregando produtos...</div>
+    <div class="summary">
+      <h3>Seus dados</h3>
+      <label>Nome
+        <input id="customerName" type="text" placeholder="Seu nome">
+      </label>
+      <label>Telefone
+        <input id="customerPhone" type="text" placeholder="(xx) xxxxx-xxxx">
+      </label>
+      <label>E-mail
+        <input id="customerEmail" type="email" placeholder="seu@email.com">
+      </label>
 
-  <div class="summary">
-    <h3>Seus dados</h3>
+      <div class="total">Total: R$ <span id="totalValue">0.00</span></div>
+      <div style="margin-top:12px">
+        <button id="sendBtn" class="btn">🎁 Enviar pedido 🎁</button>
+      </div>
 
-    <label>Nome<br>
-      <input id="customerName" type="text" class="input-nome" style="width:100%">
-    </label>
-    <br><br>
-
-    <label>Telefone<br>
-      <input id="customerPhone" type="text" class="input-telefone" style="width:100%">
-    </label>
-    <br><br>
-
-    <label>E-mail<br>
-      <input id="customerEmail" type="email" class="input-email" style="width:100%">
-    </label>
-    <br><br>
-
-    <div>
-      <span class="total">Total: R$ <span id="totalValue">0.00</span></span>
+      <div id="status" class="status"></div>
     </div>
+  </main>
+</div>
 
-    <button class="btn" id="sendBtn">🎁 Enviar pedido 🎁</button>
-    <div id="status"></div>
-  </div>
+<script>
+  // ---------- CONFIG: troque se necessário ----------
+  const API_BASE = "https://script.google.com/macros/s/AKfycbxllLunPK0ioV4KvcU7GorgOC8Z0rD43DpMCRTlCDDNLcBOQZ9o11jIMUYFmp_8BdWz/exec";
 
-  <script>
-    let PRODUCTS = [];
+  // placeholder image (data URI) usado se a imagem falhar
+  const FALLBACK_IMG = "data:image/svg+xml;utf8," + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="100%" height="100%" fill="#f5f5f5"/><text x="50%" y="50%" font-size="20" fill="#999" text-anchor="middle" alignment-baseline="middle">Imagem indisponível</text></svg>'
+  );
 
-    function renderProducts(products){
-      PRODUCTS = products;
-      const box = document.getElementById("products");
-      box.innerHTML = "";
+  let PRODUCTS = [];
 
-      products.forEach((p, idx)=>{
-        const div = document.createElement("div");
-        div.className = "product";
+  function qs(sel){ return document.querySelector(sel) }
 
-        div.innerHTML = `
-          <img src="${p.image}">
-          <div class="info">
-            <strong>${p.name}</strong>
-            <div class="price">R$ ${p.price.toFixed(2)}</div>
-          </div>
-          <input id="q_${idx}" type="number" class="qty" min="0" value="0">
-        `;
+  function showStatus(msg, ok=true){
+    const s = qs("#status");
+    s.className = ok ? "status ok" : "status err";
+    s.textContent = msg;
+    setTimeout(()=> s.style.display = ok ? "none" : "block", 10);
+    s.style.display = "block";
+    if(ok) setTimeout(()=> s.style.display = "none", 5000);
+  }
 
-        div.querySelector("input").addEventListener("input", updateTotal);
-        box.appendChild(div);
-      });
+  async function fetchProducts(){
+    try{
+      const res = await fetch(API_BASE + "?op=getProducts");
+      const json = await res.json();
+      PRODUCTS = Array.isArray(json) ? json : [];
+      renderProducts(PRODUCTS);
+    }catch(err){
+      console.error("Erro fetchProducts:", err);
+      qs("#products").innerText = "Erro ao carregar produtos. Tente novamente.";
+    }
+  }
 
-      updateTotal();
+  function renderProducts(products){
+    const box = qs("#products");
+    box.innerHTML = "";
+    if(!products || products.length===0){
+      box.innerText = "Nenhum produto disponível.";
+      return;
     }
 
-    function updateTotal(){
-      let t = 0;
-      PRODUCTS.forEach((p,idx)=>{
-        const q = Number(document.getElementById("q_"+idx).value) || 0;
-        t += q * p.price;
-      });
-      document.getElementById("totalValue").innerText = t.toFixed(2);
-    }
+    products.forEach((p, idx)=>{
+      const div = document.createElement("div");
+      div.className = "product";
+      const img = document.createElement("img");
+      img.src = p.image || FALLBACK_IMG;
+      img.alt = p.name;
+      img.onerror = ()=> { img.src = FALLBACK_IMG; };
 
-    function loadProducts(){
-      google.script.run.withSuccessHandler(renderProducts).getProducts();
-    }
+      const info = document.createElement("div");
+      info.className = "info";
+      info.innerHTML = `<strong>${escapeHtml(p.name)}</strong><div class="price">R$ ${Number(p.price).toFixed(2)}</div>`;
 
-    document.getElementById("sendBtn").addEventListener("click", ()=>{
+      const input = document.createElement("input");
+      input.type = "number";
+      input.min = 0;
+      input.value = 0;
+      input.className = "qty";
+      input.id = "q_" + idx;
+      input.addEventListener("input", updateTotal);
 
-      const name = customerName.value.trim();
-      const phone = customerPhone.value.trim();
-      const email = customerEmail.value.trim();
-      const statusBox = document.getElementById("status");
-
-      if (!name || !phone){
-        alert("Preencha Nome, Telefone e E-mail!");
-        return;
-      }
-
-      const items = [];
-      PRODUCTS.forEach((p,idx)=>{
-        const q = Number(document.getElementById("q_"+idx).value);
-        if (q > 0) items.push({name: p.name, qty: q, price: p.price});
-      });
-
-      if (items.length === 0){
-        alert("Escolha ao menos 1 produto.");
-        return;
-      }
-
-      const total = items.reduce((s,i)=> s + i.qty * i.price, 0);
-      const order = {customerName:name, customerPhone:phone, customerEmail:email, items, total};
-
-      statusBox.style.display = "block";
-      statusBox.innerHTML = "Enviando...";
-
-      google.script.run.withSuccessHandler(res=>{
-        if (res && res.status === "ok"){
-          statusBox.innerHTML = "Seu pedido foi enviado!";
-          PRODUCTS.forEach((p,idx)=> document.getElementById("q_"+idx).value = 0);
-          customerName.value = "";
-          customerPhone.value = "";
-          customerEmail.value = "";
-          updateTotal();
-          setTimeout(()=> statusBox.style.display = "none", 5000);
-        } else {
-          statusBox.innerHTML = "Erro: " + (res.message || "tente novamente");
-        }
-      }).submitOrder(order);
+      div.appendChild(img);
+      div.appendChild(info);
+      div.appendChild(input);
+      box.appendChild(div);
     });
 
-    loadProducts();
-  </script>
+    updateTotal();
+  }
+
+  function updateTotal(){
+    let t = 0;
+    PRODUCTS.forEach((p, i)=>{
+      const q = Number(qs("#q_"+i).value) || 0;
+      t += q * Number(p.price || 0);
+    });
+    qs("#totalValue").innerText = t.toFixed(2);
+  }
+
+  function escapeHtml(s){
+    if(!s) return "";
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  async function sendOrder(){
+    const name = qs("#customerName").value.trim();
+    const phone = qs("#customerPhone").value.trim();
+    const email = qs("#customerEmail").value.trim();
+
+    if(!name || !phone){
+      alert("Preencha Nome e Telefone!");
+      return;
+    }
+
+    const items = [];
+    PRODUCTS.forEach((p, idx)=>{
+      const q = Number(qs("#q_"+idx).value) || 0;
+      if(q>0) items.push({ name: p.name, qty: q, price: Number(p.price) });
+    });
+
+    if(items.length === 0){
+      alert("Escolha ao menos 1 produto.");
+      return;
+    }
+
+    const total = items.reduce((s,i)=> s + i.qty*i.price, 0);
+    const order = { customerName: name, customerPhone: phone, customerEmail: email, items, total };
+
+    showStatus("Enviando pedido...", true);
+    try{
+      // Apps Script atual espera op=submitOrder & order=<JSON>
+      const url = API_BASE + "?op=submitOrder&order=" + encodeURIComponent(JSON.stringify(order));
+      const res = await fetch(url);
+      const j = await res.json();
+      if(j && j.status === "ok"){
+        showStatus("Pedido enviado! ID: " + j.orderId, true);
+        // limpar campos
+        PRODUCTS.forEach((p, i)=> qs("#q_"+i).value = 0);
+        qs("#customerName").value = "";
+        qs("#customerPhone").value = "";
+        qs("#customerEmail").value = "";
+        updateTotal();
+      } else {
+        showStatus("Erro: " + (j && j.message ? j.message : "tente novamente"), false);
+      }
+    }catch(err){
+      console.error("sendOrder erro:", err);
+      showStatus("Erro de conexão. Verifique sua internet.", false);
+    }
+  }
+
+  qs("#sendBtn").addEventListener("click", sendOrder);
+
+  // carrega produtos ao abrir
+  fetchProducts();
+</script>
 </body>
 </html>
