@@ -1,0 +1,308 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <title>Menu Natal Especial</title>
+
+  <!-- ---------------- TEMAS ---------------- -->
+  <script>
+    const THEMES = {
+      red: { bg:"#faf6f0", header1:"#b30000", header2:"#700000", accent:"#c41e3a", textDark:"#600000" },
+    };
+    let theme = THEMES.red;
+    document.addEventListener("DOMContentLoaded", () => {
+      for (let key in theme)
+        document.documentElement.style.setProperty(`--${key}`, theme[key]);
+    });
+  </script>
+
+  <!-- ---------------- CSS ---------------- -->
+  <style>
+    :root {
+      --bg:#faf6f0; --header1:#b30000; --header2:#700000;
+      --accent:#c41e3a; --textDark:#600000;
+    }
+
+    body {
+      font-family:'Poppins',sans-serif;
+      background:var(--bg);
+      margin:0;
+      padding:18px;
+    }
+
+    h1 {
+      font-family:'Great Vibes',cursive;
+      font-size:48px;
+      text-align:center;
+      margin-bottom:10px;
+      background: linear-gradient(135deg, var(--header1), var(--header2));
+      padding:20px;
+      color:white;
+      border-radius:12px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    .item {
+      display:flex;
+      align-items:center;
+      background:#fff;
+      padding:15px;
+      border-radius:19px;
+      margin-bottom:20px;
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ----------- CARTÃO ESTILO IFOOD ----------- */
+    .product {
+      display:flex;
+      background:#fff;
+      border-radius:18px;
+      padding:16px 16px 16px 30px;
+      margin-bottom:32px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.12);
+      gap:16px;
+      align-items:center;
+    }
+
+    .product img {
+      width:130px;
+      height:130px;
+      object-fit:cover;
+      border-radius:18px;
+      border:3px solid var(--accent);
+    }
+
+    .info {
+      flex:none;
+      width:60%;
+    }
+
+    .info strong {
+      font-size:24px;
+      font-weight:700;
+      color:var(--textDark);
+    }
+
+    .info .price {
+      font-size:20px;
+      margin-top:8px;
+      font-weight:600;
+      color:#444;
+    }
+
+    .qty {
+      width:80px;
+      font-size:22px;
+      height:70px;
+      line-height:70px;
+      border-radius:12px;
+      border:2px solid var(--accent);
+      text-align:center;
+      margin-left:12px;
+      padding:0;
+    }
+
+    .btn {
+      background:var(--header1);
+      color:white;
+      border:none;
+      padding:16px 20px;
+      border-radius:14px;
+      cursor:pointer;
+      font-size:22px;
+      width:100%;
+      transition:0.25s;
+      font-weight:600;
+    }
+
+    .btn:hover {
+      background:var(--header2);
+    }
+
+    .summary {
+      margin-top:20px;
+      padding:20px;
+      border-radius:14px;
+      background:#fff;
+      box-shadow:0 3px 10px rgba(0,0,0,0.15);
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .total {
+      font-size:24px;
+      font-weight:bold;
+      color:var(--textDark);
+    }
+
+    #status {
+      display:none;
+      font-size:22px;
+      text-align:center;
+      font-weight:bold;
+      padding:14px;
+      border-radius:10px;
+      background:#e8ffe8;
+      color:#0a7a0a;
+      border:2px solid #3bb33b;
+    }
+
+    /* --------- CAMPOS INDIVIDUAIS --------- */
+
+    .input-nome {
+      font-size:30px;
+      color:#600000;
+      font-weight:600;
+      font-family:'Poppins',sans-serif;
+    }
+
+    .input-telefone {
+      font-size:30px;
+      color:#700000;
+      font-family:'Poppins',sans-serif;
+    }
+
+    .input-email {
+      font-size:30px;
+      color:#900000;
+      font-family:'Poppins',sans-serif;
+    }
+
+  </style>
+</head>
+
+<body>
+  <h1>Menu Natal Especial</h1>
+
+  <div style="text-align:center; margin:20px 0;">
+    <a href="https://drive.google.com/uc?export=view&id=1WYdfY_3xmnUY8qigKkjUOldoLjxUdRY0"
+       target="_blank" class="btn">
+       📖 Ver Catálogo Completo
+    </a>
+  </div>
+
+  <div id="products">Carregando produtos...</div>
+
+  <div class="summary">
+    <h3>Seus dados</h3>
+
+    <label>Nome<br>
+      <input id="customerName" type="text" class="input-nome" style="width:100%">
+    </label>
+    <br><br>
+
+    <label>Telefone<br>
+      <input id="customerPhone" type="text" class="input-telefone" style="width:100%">
+    </label>
+    <br><br>
+
+    <label>E-mail<br>
+      <input id="customerEmail" type="email" class="input-email" style="width:100%">
+    </label>
+    <br><br>
+
+    <div>
+      <span class="total">Total: R$ <span id="totalValue">0.00</span></span>
+    </div>
+
+    <button class="btn" id="sendBtn">🎁 Enviar pedido 🎁</button>
+    <div id="status"></div>
+  </div>
+
+  <script>
+    let PRODUCTS = [];
+
+    function renderProducts(products){
+      PRODUCTS = products;
+      const box = document.getElementById("products");
+      box.innerHTML = "";
+
+      products.forEach((p, idx)=>{
+        const div = document.createElement("div");
+        div.className = "product";
+
+        div.innerHTML = `
+          <img src="${p.image}">
+          <div class="info">
+            <strong>${p.name}</strong>
+            <div class="price">R$ ${p.price.toFixed(2)}</div>
+          </div>
+          <input id="q_${idx}" type="number" class="qty" min="0" value="0">
+        `;
+
+        div.querySelector("input").addEventListener("input", updateTotal);
+        box.appendChild(div);
+      });
+
+      updateTotal();
+    }
+
+    function updateTotal(){
+      let t = 0;
+      PRODUCTS.forEach((p,idx)=>{
+        const q = Number(document.getElementById("q_"+idx).value) || 0;
+        t += q * p.price;
+      });
+      document.getElementById("totalValue").innerText = t.toFixed(2);
+    }
+
+    function loadProducts(){
+      google.script.run.withSuccessHandler(renderProducts).getProducts();
+    }
+
+    document.getElementById("sendBtn").addEventListener("click", ()=>{
+
+      const name = customerName.value.trim();
+      const phone = customerPhone.value.trim();
+      const email = customerEmail.value.trim();
+      const statusBox = document.getElementById("status");
+
+      if (!name || !phone){
+        alert("Preencha Nome, Telefone e E-mail!");
+        return;
+      }
+
+      const items = [];
+      PRODUCTS.forEach((p,idx)=>{
+        const q = Number(document.getElementById("q_"+idx).value);
+        if (q > 0) items.push({name: p.name, qty: q, price: p.price});
+      });
+
+      if (items.length === 0){
+        alert("Escolha ao menos 1 produto.");
+        return;
+      }
+
+      const total = items.reduce((s,i)=> s + i.qty * i.price, 0);
+      const order = {customerName:name, customerPhone:phone, customerEmail:email, items, total};
+
+      statusBox.style.display = "block";
+      statusBox.innerHTML = "Enviando...";
+
+      google.script.run.withSuccessHandler(res=>{
+        if (res && res.status === "ok"){
+          statusBox.innerHTML = "Seu pedido foi enviado!";
+          PRODUCTS.forEach((p,idx)=> document.getElementById("q_"+idx).value = 0);
+          customerName.value = "";
+          customerPhone.value = "";
+          customerEmail.value = "";
+          updateTotal();
+          setTimeout(()=> statusBox.style.display = "none", 5000);
+        } else {
+          statusBox.innerHTML = "Erro: " + (res.message || "tente novamente");
+        }
+      }).submitOrder(order);
+    });
+
+    loadProducts();
+  </script>
+</body>
+</html>
