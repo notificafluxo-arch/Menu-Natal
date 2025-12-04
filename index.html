@@ -201,7 +201,7 @@ function showStatus(msg, ok=true){
     const total = items.reduce((s,i)=> s + i.qty*i.price, 0);
     const order = { customerName: name, customerPhone: phone, customerEmail: email, items, total };
 
-    showStatus("Enviando pedido...", true);
+    showStatus("Enviando pedido...", false);
     try{
       // Apps Script atual espera op=submitOrder & order=<JSON>
       const url = API_BASE + "?op=submitOrder&order=" + encodeURIComponent(JSON.stringify(order));
@@ -231,6 +231,7 @@ function showStatus(msg, ok=true){
 </script>
 </body>
 </html>
+
 
 
 
