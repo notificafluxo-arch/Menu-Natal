@@ -44,6 +44,19 @@
     <h1>Menu Natal Especial</h1>
     <a class="catalog-btn" href="https://drive.google.com/uc?export=view&id=1WYdfY_3xmnUY8qigKkjUOldoLjxUdRY0" target="_blank">📖 Ver Catálogo Completo</a>
   </header>
+<div id="successBanner" 
+     style="display:none;
+            background:#28a745;
+            color:white;
+            padding:14px;
+            border-radius:12px;
+            text-align:center;
+            font-size:20px;
+            font-weight:bold;
+            margin-bottom:15px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.15);">
+  🎄 Pedido Enviado com Sucesso! 🎄
+</div>
 
   <main>
     <div id="products">Carregando produtos...</div>
@@ -83,14 +96,23 @@
 
   function qs(sel){ return document.querySelector(sel) }
 
-  function showStatus(msg, ok=true){
+function showStatus(msg, ok=true){
     const s = qs("#status");
     s.className = ok ? "status ok" : "status err";
     s.textContent = msg;
-    setTimeout(()=> s.style.display = ok ? "none" : "block", 10);
     s.style.display = "block";
-    if(ok) setTimeout(()=> s.style.display = "none", 5000);
-  }
+
+    // NOVO: banner verde grande no topo
+    if(ok){
+        const banner = qs("#successBanner");
+        banner.style.display = "block";
+        setTimeout(() => { banner.style.display = "none"; }, 5000);
+    }
+
+    if(ok){
+        setTimeout(() => s.style.display = "none", 3000);
+    }
+}
 
   async function fetchProducts(){
     try{
@@ -209,6 +231,7 @@
 </script>
 </body>
 </html>
+
 
 
 
